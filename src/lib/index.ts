@@ -164,3 +164,5 @@ export const init = (config: Config) => {
 
 export * from './sketch';
 export * from './math';
+export * from './shapes';
+export * from './utils';
