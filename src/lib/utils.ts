@@ -11,7 +11,7 @@ const remap = (
 	stop1: number,
 	start2: number,
 	stop2: number,
-	withinBounds: boolean,
+	withinBounds = false,
 ) => {
 	const newval =
 		((value - start1) / (stop1 - start1)) * (stop2 - start2) + start2;

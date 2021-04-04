@@ -23,6 +23,10 @@ canvas.height = height;
 
 type WithContext = () => void;
 
+export const setDebug = (level: DebugLevel) => {
+	debug = level;
+};
+
 export const autoSave = <T, D>(fn: (d: D) => T) => (d: D) => {
 	save();
 	fn(d);

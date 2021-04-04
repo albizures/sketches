@@ -1,6 +1,6 @@
-import { init } from './lib';
+import { init, setDebug } from './lib';
 
-import { setup } from './sketches/tattoo';
+import { setup, sketchData } from './sketches/tattoo';
 
 // @ts-ignore
 if (module.hot) {
@@ -8,6 +8,10 @@ if (module.hot) {
 	module.hot.accept(function () {
 		location.reload();
 	});
+}
+
+if (sketchData && sketchData.debug) {
+	setDebug(sketchData.debug);
 }
 
 init({ setup })();

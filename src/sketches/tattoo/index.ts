@@ -13,7 +13,9 @@ import {
 	withDebug,
 	SketchData,
 	DebugLevel,
+	scale,
 } from '../../lib';
+
 import { doubleOnionDome } from './onion-dome';
 import { packOfMushroom } from './mushroom';
 import { prettyLeaf } from './leaf';
@@ -82,6 +84,11 @@ export const setup = () => {
 		line(0, -height / 2, 0, height / 2);
 		line(-width / 2, 0, width / 2, 0);
 		lineWidth(4);
+		rotate(Math.PI);
+		scale(-1, 1);
+
+		const leaftHeight = 200;
+		prettyLeaf(100, leaftHeight, bg);
 	});
 
 	rotate(Math.PI / 4);
