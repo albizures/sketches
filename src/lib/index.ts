@@ -10,7 +10,9 @@ export interface SketchData {
 export const canvas = document.getElementById(
 	'sketch',
 ) as HTMLCanvasElement;
-export let context = canvas.getContext('2d');
+export let context = canvas.getContext(
+	'2d',
+) as CanvasRenderingContext2D;
 export enum DebugLevel {
 	NONE,
 	INFO,
@@ -100,6 +102,10 @@ export const createGraphics = (width: number, height: number) => {
 		canvas.height = height;
 	}
 	const context = canvas.getContext('2d');
+
+	if (!context) {
+		throw new Error('Something bad happend');
+	}
 
 	return context;
 };

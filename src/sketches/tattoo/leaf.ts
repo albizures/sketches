@@ -53,7 +53,7 @@ export const prettyLeaf = (
 	save();
 	lineWidth(4);
 	leaf(width, height, bg);
-	translate(0, 12);
+	translate(0, height / 10);
 	lineWidth(2);
 	leaf(width * 0.82, height * 0.82, bg);
 

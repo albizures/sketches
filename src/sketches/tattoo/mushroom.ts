@@ -12,6 +12,7 @@ import {
 	save,
 	restore,
 	mirror,
+	scale,
 } from '../../lib';
 
 export const halfHeadLessMushroom = (height: number) => {
@@ -40,9 +41,10 @@ export const headlessMushroom = autoSave((height: number) => {
 });
 
 export const packOfMushroom = (size: number) => {
-	const shift = 24;
+	const shift = size / 10;
 	save();
-	translate(0, -103);
+	translate(0, -size / 2);
+	scale(0.8, 0.8);
 	save();
 	headlessMushroom(size * 0.3);
 	translate(shift, 0);

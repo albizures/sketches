@@ -90,7 +90,7 @@ const checkCircle = (circle: Circle, circles: Circle[]): boolean => {
 const expandCircle = (
 	circle: Circle,
 	circles: Circle[],
-	maxRadius?: number,
+	maxRadius: number,
 ) => {
 	while (true) {
 		if (circle.radius >= maxRadius) {

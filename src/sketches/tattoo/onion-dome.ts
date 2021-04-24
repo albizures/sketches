@@ -9,6 +9,8 @@ import {
 	withDebug,
 	rect,
 	mirror,
+	circle,
+	fill,
 } from '../../lib';
 
 export const onionDome = (
@@ -34,13 +36,14 @@ export const doubleOnionDome = (size: number) => {
 	save();
 	lineWidth(4);
 
-	const height = size / 2;
-	const width = size * 0.9;
+	const height = (size / 2) * 0.8;
+	const width = size * 0.7;
 
+	translate(0, size / 2);
 	onionDome(
 		{
 			x: 0,
-			y: height,
+			y: 0,
 		},
 		width,
 		height,
@@ -50,14 +53,14 @@ export const doubleOnionDome = (size: number) => {
 	onionDome(
 		{
 			x: 0,
-			y: height,
+			y: 0,
 		},
 		width * 0.8,
 		height * 0.8,
 	);
 
 	withDebug(() => {
-		rect(-size / 2, size / 2, size, height);
+		rect(-size / 2, 10, size, height);
 	});
 
 	stroke();

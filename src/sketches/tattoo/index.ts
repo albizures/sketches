@@ -29,7 +29,7 @@ export const sketchData: SketchData = {
 const bg = '#fdfbeb';
 
 export const final = () => {
-	const rectSize = 200;
+	const rectSize = 300;
 
 	const lineStart = (rectSize * 0.6) / 2;
 	const lineEnd = (rectSize * 0.8) / 2;
@@ -48,13 +48,14 @@ export const final = () => {
 		doubleOnionDome(rectSize);
 	}
 	restore();
+
 	save();
 	for (let index = 0; index < 4; index++) {
 		rotate(Math.PI / 2);
 		save();
-		translate(40, 40);
+		translate(rectSize / 4, rectSize / 4);
 		rotate(-Math.PI / 4);
-		prettyLeaf(60, 120, bg);
+		prettyLeaf(rectSize / 4, rectSize / 2, bg);
 		restore();
 	}
 	restore();
