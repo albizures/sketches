@@ -1,6 +1,6 @@
 import { init, setDebug } from './lib';
 
-import { setup, sketchData } from './sketches/fibers';
+import { setup, draw, sketchData } from './sketches/dots/square';
 
 // @ts-ignore
 if (module.hot) {
@@ -14,4 +14,4 @@ if (sketchData && sketchData.debug) {
 	setDebug(sketchData.debug);
 }
 
-init({ setup })();
+init({ setup, draw })();

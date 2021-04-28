@@ -123,6 +123,7 @@ export const scale = (x: number, y: number) => {
 };
 
 export const background = (color: string) => {
+	context.canvas.width = context.canvas.width;
 	context.save();
 	context.fillStyle = color;
 	context.fillRect(0, 0, width, height);
