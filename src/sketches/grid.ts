@@ -1,25 +1,4 @@
-import {
-	background,
-	Vector,
-	beginPath,
-	moveTo,
-	stroke,
-	bezierCurveTo,
-	rect,
-	save,
-	restore,
-	translate,
-	height,
-	width,
-	strokeStyle,
-	lineWidth,
-	rotate,
-	scale,
-	line,
-	circle,
-	fill,
-	fillStyle,
-} from '../lib';
+import { height, width, line, circle } from '../lib';
 
 interface Line {
 	position: number;

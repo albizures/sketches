@@ -1,6 +1,6 @@
 import { init, setDebug } from './lib';
 
-import { setup, sketchData } from './sketches/tattoo';
+import { setup, sketchData } from './sketches/fibers';
 
 // @ts-ignore
 if (module.hot) {

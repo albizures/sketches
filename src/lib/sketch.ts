@@ -43,6 +43,17 @@ export const beginPath = () => {
 	context.beginPath();
 };
 
+export const arc = (
+	x: number,
+	y: number,
+	radius: number,
+	startAngle: number,
+	endAngle: number,
+	anticlockwise?: boolean | undefined,
+) => {
+	context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+};
+
 export const stroke = () => {
 	context.stroke();
 };

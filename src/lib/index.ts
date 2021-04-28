@@ -1,6 +1,14 @@
 import { Vector } from './math';
 import { noop } from './utils';
-import { width, height, save, restore } from './sketch';
+import {
+	width,
+	height,
+	save,
+	restore,
+	beginPath,
+	arc,
+	stroke,
+} from './sketch';
 
 export interface SketchData {
 	name?: string;
@@ -66,9 +74,9 @@ drawImage.v = (ctx: CanvasRenderingContext2D, position: Vector) =>
 	drawImage(ctx, position.x, position.y);
 
 export const circle = (x: number, y: number, radius: number) => {
-	context.beginPath();
-	context.arc(x, y, radius, 0, 2 * Math.PI);
-	context.stroke();
+	beginPath();
+	arc(x, y, radius, 0, 2 * Math.PI);
+	stroke();
 };
 
 circle.v = (vector: Vector, radius: number) => {
