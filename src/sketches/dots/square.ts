@@ -1,5 +1,10 @@
 // a remake of https://www.instagram.com/p/COAAI4InQeS
-
+import {
+	System,
+	Component,
+	Position,
+	FillStyle,
+} from '../../utils/ecs';
 import {
 	background,
 	circle,
@@ -12,45 +17,32 @@ import {
 	width,
 } from '../../lib';
 
-export const sketchData: SketchData = {
-	name: 'Tattoo',
-	debug: DebugLevel.NONE,
-};
-
-interface Vector {
-	x: number;
-	y: number;
-}
-
-enum Direction {
+enum DirectionType {
 	DOWN = 'red',
 	UP = 'blue',
 	LEFT = 'yellow',
 	RIGHT = 'green',
 }
 
-interface Dot {
-	pos: Vector;
-	radius: number;
-	color: string;
-	direction: Direction | undefined;
-}
+type MaybeDirection = DirectionType | undefined;
 
-const createDot = (
-	pos: Vector,
-	direction?: Direction,
-	radius = 1,
-	color = 'white',
-): Dot => {
-	return {
-		pos,
-		radius,
-		color,
-		direction,
-	};
+let Direction: Component<MaybeDirection> = {
+	requirements: [],
 };
 
-let dots: Dot[][] = [];
+let Radius: Component<number> = {
+	requirements: [],
+};
+
+let system = new System()
+	.registerComponent(Direction)
+	.registerComponent(Radius);
+
+export const sketchData: SketchData = {
+	name: 'Conveyor',
+	debug: DebugLevel.NONE,
+};
+
 let margin = 20;
 let size = 21;
 
@@ -62,14 +54,14 @@ const getDirection = (x: number, y: number) => {
 		((x < half && x + 1 > Math.ceil(y)) ||
 			(x >= half && x + y + 1 < size))
 	) {
-		return Direction.RIGHT;
+		return DirectionType.RIGHT;
 	}
 
 	if (
 		x > half &&
 		((y <= half && x + y >= size - 1) || (y > half && x > y))
 	) {
-		return Direction.DOWN;
+		return DirectionType.DOWN;
 	}
 
 	if (
@@ -77,14 +69,14 @@ const getDirection = (x: number, y: number) => {
 		((x >= half && x < y + 1) ||
 			(x < half && Math.ceil(x) + y >= size))
 	) {
-		return Direction.LEFT;
+		return DirectionType.LEFT;
 	}
 
 	if (
 		x < half &&
 		((y >= half && x + y < size) || (y < half && x < y))
 	) {
-		return Direction.UP;
+		return DirectionType.UP;
 	}
 };
 
@@ -94,54 +86,48 @@ export const setup = () => {
 	translate(width / 2 - gridSize / 2, height / 2 - gridSize / 2);
 
 	for (let y = 0; y < size; y++) {
-		let row: Dot[] = [];
 		for (let x = 0; x < size; x++) {
-			const pos = {
-				x,
-				y,
-			};
-
-			let direction = getDirection(x, y);
-
-			const dot = createDot(pos, direction, 1, direction);
-
-			row.push(dot);
+			system
+				.createEntity()
+				.addComponent(Position, {
+					x,
+					y,
+				})
+				.addComponent(FillStyle, 'white')
+				.addComponent(Direction, getDirection(x, y))
+				.addComponent(Radius, 1);
 		}
-
-		dots.push(row);
 	}
 };
 
-let shift = 1;
 let speed = 0.01;
 export const draw = () => {
 	background('black');
 	let gridSize = margin * size;
 	translate(width / 2 - gridSize / 2, height / 2 - gridSize / 2);
 
-	for (let y = 0; y < dots.length; y++) {
-		let row = dots[y];
-		for (let x = 0; x < row.length; x++) {
-			let dot = row[x];
+	for (let entity of system.entities) {
+		let pos = entity.getProps(Position);
+		let direction = entity.getProps(Direction);
+		let radius = entity.getProps(Radius);
 
-			if (dot.direction === Direction.RIGHT) {
-				dot.pos.x += speed;
-			}
-			if (dot.direction === Direction.DOWN) {
-				dot.pos.y += +speed;
-			}
-			if (dot.direction === Direction.LEFT) {
-				dot.pos.x -= speed;
-			}
-			if (dot.direction === Direction.UP) {
-				dot.pos.y -= speed;
-			}
-
-			dot.direction = getDirection(dot.pos.x, dot.pos.y);
-
-			fillStyle('white');
-			circle(dot.pos.x * margin, dot.pos.y * margin, dot.radius);
-			fill();
+		if (direction === DirectionType.RIGHT) {
+			pos.x += speed;
 		}
+		if (direction === DirectionType.DOWN) {
+			pos.y += +speed;
+		}
+		if (direction === DirectionType.LEFT) {
+			pos.x -= speed;
+		}
+		if (direction === DirectionType.UP) {
+			pos.y -= speed;
+		}
+
+		entity.setProps(Direction, getDirection(pos.x, pos.y));
+
+		fillStyle('white');
+		circle(pos.x * margin, pos.y * margin, radius);
+		fill();
 	}
 };
