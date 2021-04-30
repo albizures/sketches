@@ -4,12 +4,14 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "parcel src/index.html"
+		"start": "parcel src/index.html",
+		"format": "prettier --write ."
 	},
 	"devDependencies": {
 		"@albizures/prettier-config": "^1.0.1",
 		"@types/bezier-js": "^0.0.8",
 		"parcel": "^1.12.4",
+		"prettier": "^2.2.1",
 		"typescript": "^4.0.5"
 	},
 	"dependencies": {
