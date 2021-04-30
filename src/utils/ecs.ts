@@ -1,74 +1,61 @@
 interface Vector {
-	x: number,
-	y: number,
+	x: number;
+	y: number;
 }
 
-enum ComponentType {
-	POSITION,
-	STROKE_COLOR,
-	FILL_COLOR,
-	CIRCLE,
+export interface Component<T> {
+	requirements: string[];
 }
 
-interface Component {
-	type: ComponentType,
-	requirements: ComponentType[],
-}
+export let Position: Component<Vector> = {
+	requirements: [],
+};
 
-interface PositionComponent extends Component {
-	type: Component.POSITION,
-	pos: Vector,
-}
+export let FillStyle: Component<string> = {
+	requirements: [],
+};
 
-interface CircleComponent extends Component {
-	type: Component.CIRCLE,
-	radius: number
-}
+export class Entity {
+	components = new Map<Component<unknown>, unknown>();
 
-interface Entity {
-	id: string;
-	components: Component[],
-}
+	addComponent<T>(component: Component<T>, props: T) {
+		this.components.set(component, props);
+		return this;
+	}
 
-export let components = {
-	createPosition(x: number, y, number): PositionComponent{
-		return {
-			type: ComponentType.POSITION,
-			requirements: [],
-			pos: {
-				x, y
-			}
-		}
-	},
-	createCircle(radius: number) {
-		return {
-			type: ComponentType.CIRCLE,
-			requirements: [ComponentType.POSITION],
-			radius
-		}
+	getProps<T>(component: Component<T>): T {
+		let props = this.components.get(component);
+
+		return props as T;
+	}
+
+	setProps<T>(component: Component<T>, props: T) {
+		this.components.set(component, props);
+
+		return this;
 	}
 }
 
-export let entities: Entity[] = [];
+export class System {
+	name?: string;
+	components = new Set<Component<unknown>>();
+	entities = new Set<Entity>();
 
-export let createEntity = (id: string, components: Component[]): Entity => {
-	let missingRequirements = components.reduce((requirements, component) => {
-		component.requirements.forEach(requirements.add)
-		if (requirements.has(component.type)) {
-			requirements.delete(component.type)
+	registerComponent<T>(component: Component<T>) {
+		if (this.components.has(component)) {
+			throw new Error('Component already added');
 		}
-	}, new Set<ComponentType>());
-	
-	if (missingRequirements.size() > 0) {
-		throw new Error('Missing requirements, check your components')
+
+		this.components.add(component);
+
+		return this;
 	}
-	
-	let entity = {
-		id,
-		components
+
+	createEntity() {
+		let entity = new Entity();
+
+		this.entities.add(entity);
+
+		return entity;
 	}
-	
-	entities.push(entity)
-	
-	return entity
 }
