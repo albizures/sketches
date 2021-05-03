@@ -1,10 +1,6 @@
 // a remake of https://www.instagram.com/p/COAAI4InQeS
-import {
-	System,
-	Component,
-	Position,
-	FillStyle,
-} from '../../utils/ecs';
+import { System, Component } from '../../utils/ecs';
+import { Radius, Position, FillStyle } from '../../components';
 import {
 	background,
 	circle,
@@ -16,6 +12,7 @@ import {
 	translate,
 	width,
 } from '../../lib';
+import { Vector } from '../../coordinates';
 
 enum DirectionType {
 	DOWN = 'red',
@@ -28,15 +25,10 @@ type MaybeDirection = DirectionType | undefined;
 
 let Direction: Component<MaybeDirection> = {
 	requirements: [],
+	utils: {},
 };
 
-let Radius: Component<number> = {
-	requirements: [],
-};
-
-let system = new System()
-	.registerComponent(Direction)
-	.registerComponent(Radius);
+let system = new System();
 
 export const sketchData: SketchData = {
 	name: 'Conveyor',
@@ -89,18 +81,15 @@ export const setup = () => {
 		for (let x = 0; x < size; x++) {
 			system
 				.createEntity()
-				.addComponent(Position, {
-					x,
-					y,
-				})
+				.addComponent(Position, new Vector(x, y))
 				.addComponent(FillStyle, 'white')
 				.addComponent(Direction, getDirection(x, y))
-				.addComponent(Radius, 1);
+				.addComponent(Radius, 2);
 		}
 	}
 };
 
-let speed = 0.01;
+let speed = 0.001;
 export const draw = () => {
 	background('black');
 	let gridSize = margin * size;
