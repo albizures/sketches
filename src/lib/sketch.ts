@@ -1,21 +1,18 @@
 import { context } from '../lib';
-import { Vector } from './math';
+import { Vector } from './coordinates';
 
 export const CLOSE = 'CLOSE';
 
 export let fills = true;
 export let { innerWidth: width, innerHeight: height } = window;
-export let mouse: Vector = { x: 0, y: 0 };
+export let mouse: Vector = new Vector(0, 0);
 
 window.addEventListener('mousemove', (event) => {
 	mouse.x = event.clientX;
 	mouse.y = event.clientY;
 });
 
-export const center: Vector = {
-	x: width / 2,
-	y: height / 2,
-};
+export const center: Vector = new Vector(width / 2, height / 2);
 
 export const noFill = () => {};
 

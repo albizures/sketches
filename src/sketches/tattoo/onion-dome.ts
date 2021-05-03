@@ -22,10 +22,13 @@ export const onionDome = (
 	const sideWidth = width / 2;
 	translate(center.x, center.y);
 
-	const start = { x: sideWidth * 0.96, y: 0 };
-	const end = { x: 0, y: height };
-	const control1 = { x: sideWidth, y: height * 0.78 };
-	const control2 = { x: sideWidth * 0.36, y: height * 0.54 };
+	const start = Vector.obj({ x: sideWidth * 0.96, y: 0 });
+	const end = Vector.obj({ x: 0, y: height });
+	const control1 = Vector.obj({ x: sideWidth, y: height * 0.78 });
+	const control2 = Vector.obj({
+		x: sideWidth * 0.36,
+		y: height * 0.54,
+	});
 
 	mirror(() => drawBezier(start, control1, control2, end));
 
@@ -40,24 +43,10 @@ export const doubleOnionDome = (size: number) => {
 	const width = size * 0.7;
 
 	translate(0, size / 2);
-	onionDome(
-		{
-			x: 0,
-			y: 0,
-		},
-		width,
-		height,
-	);
+	onionDome(Vector.zero(), width, height);
 
 	lineWidth(1);
-	onionDome(
-		{
-			x: 0,
-			y: 0,
-		},
-		width * 0.8,
-		height * 0.8,
-	);
+	onionDome(Vector.zero(), width * 0.8, height * 0.8);
 
 	withDebug(() => {
 		rect(-size / 2, 10, size, height);

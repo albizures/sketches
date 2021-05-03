@@ -15,7 +15,6 @@
 	"dependencies": {
 		"bezier-js": "^4.0.3",
 		"canvas-sketch-util": "^1.10.0",
-		"nice-color-palettes": "^3.0.0",
-		"noisejs": "^2.1.0"
+		"nice-color-palettes": "^3.0.0"
 	}
 }

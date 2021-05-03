@@ -19,7 +19,7 @@ import {
 	FillStyle,
 	PolarVelocity,
 } from '../../components';
-import { PolarVector, Vector } from '../../coordinates';
+import { PolarVector, Vector } from '../../lib/coordinates';
 
 export let sketchData: SketchData = {
 	name: 'Polar Grid',

@@ -1,5 +1,10 @@
 import { PolarVector } from './common';
 
+interface PlainVector {
+	x: number;
+	y: number;
+}
+
 export class Vector {
 	x: number;
 	y: number;
@@ -17,5 +22,17 @@ export class Vector {
 		let { r, angle } = vector;
 
 		return new Vector(r * Math.cos(angle), r * Math.sin(angle));
+	}
+
+	static zero(): Vector {
+		return new Vector(0, 0);
+	}
+
+	static new(x: number, y: number) {
+		return new Vector(x, y);
+	}
+
+	static obj({ y, x }: PlainVector) {
+		return new Vector(x, y);
 	}
 }

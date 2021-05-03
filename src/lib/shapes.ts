@@ -1,5 +1,4 @@
 import {
-	Vector,
 	beginPath,
 	moveTo,
 	stroke,
@@ -13,6 +12,7 @@ import {
 	quadraticCurveTo,
 	withDebug,
 } from '../lib';
+import { Vector } from '../lib/coordinates';
 
 export const drawQuadraticBezier = (
 	start: Vector,

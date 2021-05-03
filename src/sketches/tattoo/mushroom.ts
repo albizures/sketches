@@ -13,6 +13,7 @@ import {
 	restore,
 	mirror,
 	scale,
+	Vector,
 } from '../../lib';
 
 export const halfHeadLessMushroom = (height: number) => {
@@ -20,10 +21,10 @@ export const halfHeadLessMushroom = (height: number) => {
 	const topWidth = height * 0.5;
 
 	drawBezier(
-		{ x: bottomWidth / 2, y: 0 },
-		{ x: bottomWidth / 2, y: height * 0.5 },
-		{ x: topWidth / 2, y: height },
-		{ x: 0, y: height },
+		Vector.new(bottomWidth / 2, 0),
+		Vector.new(bottomWidth / 2, height * 0.5),
+		Vector.new(topWidth / 2, height),
+		Vector.new(0, height),
 	);
 	fill();
 	beginPath();

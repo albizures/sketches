@@ -14,6 +14,7 @@ import {
 	SketchData,
 	DebugLevel,
 	scale,
+	Vector,
 } from '../../lib';
 
 import { doubleOnionDome } from './onion-dome';
@@ -63,13 +64,7 @@ export const final = () => {
 	cube(rectSize * 0.5, bg);
 	cube(rectSize * 0.6, bg);
 
-	circlePacking(
-		{
-			x: 0,
-			y: 0,
-		},
-		rectSize * 0.6,
-	);
+	circlePacking(new Vector(0, 0), rectSize * 0.6);
 };
 
 export const setup = () => {

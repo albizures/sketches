@@ -1,7 +1,13 @@
 import { center, mouse, width, fill } from '../lib/sketch';
-import { translate, circle, background } from '../lib';
+import {
+	translate,
+	circle,
+	background,
+	Vector,
+	PolarVector,
+} from '../lib';
 import { text, textSize } from '../lib/text';
-import { cos, PI, map, polarToCartesian } from '../lib/math';
+import { cos, PI, map } from '../lib/math';
 
 interface PolarCircle {
 	angle: number;
@@ -41,14 +47,16 @@ export const draw = () => {
 	background('white');
 	textSize(30);
 	const modifier = map(mouse.x, 0, width, 0, 100);
-	text(modifier, { y: 30, x: 10 });
+	text(modifier, new Vector(10, 30));
 	translate.v(center);
 
-	circle.v(polarToCartesian(0, 0), basePosition);
+	circle.v(new Vector(0, 0), basePosition);
 
 	for (let index = 0; index < dots.length; index++) {
 		const dot = dots[index];
-		const position = polarToCartesian(dot.angle, dot.position);
+		const position = Vector.fromPolar(
+			new PolarVector(dot.angle, dot.position),
+		);
 
 		circle.v(position, dot.radius);
 		fill();

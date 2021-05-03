@@ -1,4 +1,4 @@
-import { PolarVector, Vector } from '../coordinates';
+import { PolarVector, Vector } from '../lib/coordinates';
 import { Component } from '../utils/ecs';
 
 export let Radius: Component<number> = {

@@ -14,6 +14,7 @@ import {
 	remap,
 	circle,
 	strokeStyle,
+	Vector,
 } from '../../lib';
 // @ts-ignore
 import { Bezier } from 'bezier-js';
@@ -24,18 +25,9 @@ const leaf = (width: number, height: number, bg: string) => {
 		stroke();
 	});
 
-	const start = {
-		x: 0,
-		y: 0,
-	};
-	const control = {
-		x: width,
-		y: height / 2,
-	};
-	const end = {
-		x: 0,
-		y: height,
-	};
+	const start = Vector.zero();
+	const control = Vector.new(width, height);
+	const end = Vector.new(0, height);
 
 	mirror(() => {
 		drawQuadraticBezier(start, control, end);

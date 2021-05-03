@@ -12,7 +12,7 @@ import {
 	translate,
 	width,
 } from '../../lib';
-import { Vector } from '../../coordinates';
+import { Vector } from '../../lib/coordinates';
 
 enum DirectionType {
 	DOWN = 'red',

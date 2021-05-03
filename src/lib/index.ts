@@ -1,4 +1,4 @@
-import { Vector } from './math';
+import { Vector } from './coordinates';
 import { noop } from './utils';
 import {
 	width,
@@ -122,6 +122,10 @@ export const scale = (x: number, y: number) => {
 	context.scale(x, y);
 };
 
+export const center = () => {
+	translate(width / 2, height / 2);
+};
+
 export const background = (color: string) => {
 	context.canvas.width = context.canvas.width;
 	context.save();
@@ -185,3 +189,4 @@ export * from './sketch';
 export * from './math';
 export * from './shapes';
 export * from './utils';
+export * from './coordinates';
