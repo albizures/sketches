@@ -1,19 +1,7 @@
-interface Vector {
-	x: number;
-	y: number;
-}
-
-export interface Component<T> {
+export interface Component<T, U = {}> {
 	requirements: string[];
+	utils: U;
 }
-
-export let Position: Component<Vector> = {
-	requirements: [],
-};
-
-export let FillStyle: Component<string> = {
-	requirements: [],
-};
 
 export class Entity {
 	components = new Map<Component<unknown>, unknown>();
@@ -21,6 +9,10 @@ export class Entity {
 	addComponent<T>(component: Component<T>, props: T) {
 		this.components.set(component, props);
 		return this;
+	}
+
+	hasComponent<T>(component: Component<T>): boolean {
+		return this.components.has(component);
 	}
 
 	getProps<T>(component: Component<T>): T {
@@ -38,18 +30,7 @@ export class Entity {
 
 export class System {
 	name?: string;
-	components = new Set<Component<unknown>>();
 	entities = new Set<Entity>();
-
-	registerComponent<T>(component: Component<T>) {
-		if (this.components.has(component)) {
-			throw new Error('Component already added');
-		}
-
-		this.components.add(component);
-
-		return this;
-	}
 
 	createEntity() {
 		let entity = new Entity();
@@ -57,5 +38,17 @@ export class System {
 		this.entities.add(entity);
 
 		return entity;
+	}
+
+	*query(components: Component<unknown>[]) {
+		for (const entity of this.entities) {
+			if (
+				components.every((component) =>
+					entity.hasComponent(component),
+				)
+			) {
+				yield entity;
+			}
+		}
 	}
 }
