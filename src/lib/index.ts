@@ -147,6 +147,15 @@ rect.v = (anchor: Vector, width: number, height: number) => {
 	context.rect(anchor.x, anchor.y, width, height);
 };
 
+export const getImageData = (
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+) => {
+	return context.getImageData(x, y, width, height);
+};
+
 export const strokeRect = (
 	x: number,
 	y: number,
@@ -158,14 +167,20 @@ export const strokeRect = (
 
 type Draw = () => void;
 type Setup = () => void;
+type Preload = () => Promise<unknown>;
 
 interface Config {
 	draw?: Draw;
 	setup?: Setup;
+	preload?: Preload;
 }
 
-export const init = (config: Config) => {
-	const { draw, setup } = config;
+export const init = async (config: Config) => {
+	const { draw, setup, preload } = config;
+
+	if (preload) {
+		await preload();
+	}
 
 	if (setup) {
 		setup();
@@ -190,3 +205,5 @@ export * from './math';
 export * from './shapes';
 export * from './utils';
 export * from './coordinates';
+export * from './files';
+export * from './print';
