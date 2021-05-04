@@ -13,6 +13,7 @@ import {
 	withDebug,
 } from '../lib';
 import { Vector } from '../lib/coordinates';
+import { closePath, lineTo } from './sketch';
 
 export const drawQuadraticBezier = (
 	start: Vector,
@@ -69,4 +70,31 @@ export const drawBezier = (
 	});
 
 	restore();
+};
+
+export const quad = (
+	x1: number,
+	y1: number,
+	x2: number,
+	y2: number,
+	x3: number,
+	y3: number,
+	x4: number,
+	y4: number,
+) => {
+	beginPath();
+	moveTo(x1, y1);
+	lineTo(x2, y2);
+	lineTo(x3, y3);
+	lineTo(x4, y4);
+	closePath();
+};
+
+export const square = (
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+) => {
+	quad(x, y, x + width, y, x + width, y + height, x, y + height);
 };
