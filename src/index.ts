@@ -1,6 +1,8 @@
 import { init, setDebug } from './lib';
 
-import { setup, sketchData } from './sketches/image/dotte';
+import sketch from './sketches/image/dotte';
+
+const { sketchData } = sketch;
 
 // @ts-ignore
 if (module.hot) {
@@ -14,4 +16,4 @@ if (sketchData && sketchData.debug) {
 	setDebug(sketchData.debug);
 }
 
-init({ setup })();
+init(sketch).then((t) => t());

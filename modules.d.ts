@@ -1,4 +1,28 @@
+declare module 'canvas-sketch-util/color' {
+	export interface Color {
+		hex: string;
+		alpha: number;
+		rgb: [number, number, number];
+		rgba: [number, number, number, number];
+		hsl: [number, number, number];
+		hsla: [number, number, number, number];
+	}
+
+	export function relativeLuminance(input: unknown): number;
+	export function parse(
+		input:
+			| string
+			| [number, number, number]
+			| [number, number, number, number],
+	): Color;
+}
 declare module 'canvas-sketch-util/math' {
+	export function lerp(min: number, max: number, t: number);
+	export function inverseLerp(
+		min: number,
+		max: number,
+		value: number,
+	);
 	export function mapRange(
 		value: number,
 		inputMin: number,
@@ -10,6 +34,7 @@ declare module 'canvas-sketch-util/math' {
 }
 
 declare module 'canvas-sketch-util/random' {
+	export function setSeed(n: number | string): number;
 	export function noise1D(
 		x: number,
 		frequency?: number,
