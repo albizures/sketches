@@ -90,7 +90,7 @@ export const quad = (
 	closePath();
 };
 
-export const square = (
+export const rectangle = (
 	x: number,
 	y: number,
 	width: number,

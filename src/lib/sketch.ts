@@ -16,7 +16,8 @@ export const center: Vector = new Vector(width / 2, height / 2);
 
 export const noFill = () => {};
 
-export const fill = () => {
+export const fill = (value?: string) => {
+	value && fillStyle(value);
 	context.fill();
 };
 
