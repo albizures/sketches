@@ -68,23 +68,6 @@ export const closePath = () => {
 	context.closePath();
 };
 
-export const line = (
-	x1: number,
-	y1: number,
-	x2: number,
-	y2: number,
-) => {
-	beginPath();
-	moveTo(x1, y1);
-	lineTo(x2, y2);
-	closePath();
-	stroke();
-};
-
-line.v = (start: Vector, end: Vector) => {
-	line(start.x, start.y, end.x, end.y);
-};
-
 export const endShape = (close?: string) => {
 	if (close === CLOSE) {
 		context.closePath();
@@ -147,4 +130,8 @@ export const bezierCurveTo = (
 
 export const fillStyle = (style: string) => {
 	context.fillStyle = style;
+};
+
+export const rotate = (angle: number) => {
+	context.rotate(angle);
 };

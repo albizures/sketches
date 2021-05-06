@@ -1,65 +1,22 @@
+import { context } from './context';
 import { Vector } from './coordinates';
 import { noop } from './utils';
-import {
-	width,
-	height,
-	save,
-	restore,
-	beginPath,
-	arc,
-	stroke,
-} from './sketch';
+import { DebugLevel } from './debug';
+
+import { width, height, save, restore } from './sketch';
+
+context.canvas.width = width;
+context.canvas.height = height;
 
 export interface SketchData {
 	name?: string;
 	debug?: DebugLevel;
 }
 
-export const canvas = document.getElementById(
-	'sketch',
-) as HTMLCanvasElement;
-export let context = canvas.getContext(
-	'2d',
-) as CanvasRenderingContext2D;
-export enum DebugLevel {
-	NONE,
-	INFO,
-	ALL,
-}
-export let debug: DebugLevel = DebugLevel.NONE;
-
-canvas.width = width;
-canvas.height = height;
-
-type WithContext = () => void;
-
-export const setDebug = (level: DebugLevel) => {
-	debug = level;
-};
-
 export const autoSave = <T, D>(fn: (d: D) => T) => (d: D) => {
 	save();
 	fn(d);
 	restore();
-};
-
-export const withDebug = (
-	fn: () => void,
-	level = DebugLevel.INFO,
-) => {
-	if (level === debug) {
-		fn();
-	}
-};
-
-export const withContext = (
-	fn: WithContext,
-	ctx: CanvasRenderingContext2D,
-) => {
-	const temp = context;
-	context = ctx;
-	fn();
-	context = temp;
 };
 
 export const drawImage = (
@@ -73,16 +30,6 @@ export const drawImage = (
 drawImage.v = (ctx: CanvasRenderingContext2D, position: Vector) =>
 	drawImage(ctx, position.x, position.y);
 
-export const circle = (x: number, y: number, radius: number) => {
-	beginPath();
-	arc(x, y, radius, 0, 2 * Math.PI);
-	stroke();
-};
-
-circle.v = (vector: Vector, radius: number) => {
-	circle(vector.x, vector.y, radius);
-};
-
 export const translate = (x: number, y: number) => {
 	context.translate(x, y);
 };
@@ -95,10 +42,6 @@ translate.toMiddle = (width: number, height?: number) => {
 	height = height ?? width;
 
 	translate(width / 2, height / 2);
-};
-
-export const rotate = (angle: number) => {
-	context.rotate(angle);
 };
 
 export const createGraphics = (width: number, height: number) => {
@@ -132,19 +75,6 @@ export const background = (color: string) => {
 	context.fillStyle = color;
 	context.fillRect(0, 0, width, height);
 	context.restore();
-};
-
-export const rect = (
-	x: number,
-	y: number,
-	width: number,
-	height: number,
-) => {
-	context.rect(x, y, width, height);
-};
-
-rect.v = (anchor: Vector, width: number, height: number) => {
-	context.rect(anchor.x, anchor.y, width, height);
 };
 
 export const getImageData = (
@@ -200,10 +130,11 @@ export const init = async (config: Config) => {
 	return noop;
 };
 
+export * from './context';
 export * from './sketch';
 export * from './math';
 export * from './shapes';
 export * from './utils';
 export * from './coordinates';
 export * from './files';
-export * from './print';
+export * from './debug';

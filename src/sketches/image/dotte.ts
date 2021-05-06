@@ -3,33 +3,17 @@ import {
 	DebugLevel,
 	background,
 	loadImage,
-	drawImage,
-	scale,
-	withContext,
-	center,
 	createGraphics,
 	width,
 	height,
-	circle,
 	fill,
-	fillStyle,
-	print,
-	save,
-	restore,
 	quad,
-	getImageData,
-	rectangle,
 	noise,
 } from '../../lib';
 //@ts-ignore
 import image from '../../../public/girl.jpeg';
-import { inverseLerp } from 'canvas-sketch-util/math';
-import { noise2D, setSeed } from 'canvas-sketch-util/random';
-import {
-	relativeLuminance,
-	parse,
-	Color,
-} from 'canvas-sketch-util/color';
+import { setSeed } from 'canvas-sketch-util/random';
+import { parse, Color } from 'canvas-sketch-util/color';
 
 const { sqrt, sin, cos } = Math;
 
