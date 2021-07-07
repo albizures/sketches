@@ -61,16 +61,46 @@ export const createGraphics = (width: number, height: number) => {
 	return context;
 };
 
+type CompositeOperation =
+	| 'normal'
+	| 'multiply'
+	| 'screen'
+	| 'overlay'
+	| 'darken'
+	| 'lighten'
+	| 'lighter'
+	| 'color-dodge'
+	| 'color-burn'
+	| 'hard-light'
+	| 'soft-light'
+	| 'difference'
+	| 'exclusion'
+	| 'hue'
+	| 'saturation'
+	| 'color'
+	| 'luminosity';
+
+export const globalCompositeOperation = (
+	value: CompositeOperation,
+) => {
+	context.globalCompositeOperation = value;
+};
+
 export const scale = (x: number, y: number) => {
 	context.scale(x, y);
 };
 
-export const center = () => {
-	translate(width / 2, height / 2);
+export const center = (offsetX = 0, offsetY = offsetX) => {
+	translate(width / 2 + offsetX, height / 2 + offsetY);
 };
 
 export const background = (color: string) => {
-	context.canvas.width = context.canvas.width;
+	context.clearRect(
+		0,
+		0,
+		context.canvas.width,
+		context.canvas.height,
+	);
 	context.save();
 	context.fillStyle = color;
 	context.fillRect(0, 0, width, height);

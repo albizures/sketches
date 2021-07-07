@@ -1,4 +1,10 @@
-import { noise1D, noise2D, noise3D } from 'canvas-sketch-util/random';
+import {
+	noise1D,
+	noise2D,
+	noise3D,
+	value,
+	range,
+} from 'canvas-sketch-util/random';
 
 export const { PI, abs } = Math;
 export const TAU = PI * 2;
@@ -46,5 +52,7 @@ export const noise = (x: number, y?: number, z?: number): number => {
 		return noise2D(x, y);
 	}
 
-	return noise1D(x, 0);
+	return noise1D(x);
 };
+
+export const random = (min = 0, max = 1) => range(min, max);
