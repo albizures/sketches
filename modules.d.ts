@@ -34,6 +34,7 @@ declare module 'canvas-sketch-util/math' {
 }
 
 declare module 'canvas-sketch-util/random' {
+	export function value(): number;
 	export function setSeed(n: number | string): number;
 	export function noise1D(
 		x: number,

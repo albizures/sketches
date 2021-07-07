@@ -25,7 +25,6 @@ type MaybeDirection = DirectionType | undefined;
 
 let Direction: Component<MaybeDirection> = {
 	requirements: [],
-	utils: {},
 };
 
 let system = new System();

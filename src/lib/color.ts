@@ -1,3 +1,3 @@
 export const color = (hex: string) => {
-  return hex;
+	return hex;
 };
