@@ -1,6 +1,6 @@
 import { init, setDebug } from './lib';
 
-import sketch from './sketches/blend/square';
+import sketch from './sketches/easings/stiff';
 
 const { sketchData } = sketch;
 

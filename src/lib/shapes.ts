@@ -13,7 +13,7 @@ import {
 } from '../lib';
 import { context } from './context';
 import { Vector } from '../lib/coordinates';
-import { closePath, lineTo, arc } from './sketch';
+import { closePath, lineTo, arc, endShape } from './sketch';
 
 export const drawQuadraticBezier = (
 	start: Vector,
@@ -102,6 +102,7 @@ export const rectangle = (
 export const circle = (x: number, y: number, radius: number) => {
 	beginPath();
 	arc(x, y, radius, 0, 2 * Math.PI);
+	endShape();
 	stroke();
 };
 
