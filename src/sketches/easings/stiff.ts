@@ -11,12 +11,12 @@ import {
 	endShape,
 } from '../../lib';
 
-const sketchData: SketchData = {
+export const sketchData: SketchData = {
 	name: 'name',
 	debug: DebugLevel.NONE,
 };
 
-const setup = () => {};
+export const setup = () => {};
 
 let step = 0;
 let speed = 0.01;
@@ -26,7 +26,7 @@ function easeOutQuart(x: number): number {
 	return 1 - Math.pow(1 - x, 4);
 }
 
-const draw = () => {
+export const draw = () => {
 	background('black');
 	center();
 
@@ -36,7 +36,7 @@ const draw = () => {
 	moveTo(step, 0);
 
 	const position = easeOutQuart(step) * target;
-	console.log(position);
+	// console.log(position);
 
 	bezierCurveTo(0, 0, -position, -150, 0, -300);
 	stroke();
@@ -48,10 +48,4 @@ const draw = () => {
 		step = 0;
 		target = -target;
 	}
-};
-
-export default {
-	sketchData,
-	setup,
-	draw,
 };

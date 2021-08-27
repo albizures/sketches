@@ -25,7 +25,7 @@ export const sketchData: SketchData = {
 const steps = 10;
 const size = 300;
 
-const setup = () => {
+export const setup = () => {
 	console.log(noise(1));
 };
 
@@ -54,7 +54,7 @@ const drawSquare = () => {
 	}
 };
 
-const draw = () => {
+export const draw = () => {
 	background('black');
 	center(-size / 2, size / 2);
 
@@ -62,10 +62,4 @@ const draw = () => {
 	drawSquare();
 
 	diff += 0.1;
-};
-
-export default {
-	sketchData,
-	setup,
-	draw,
 };

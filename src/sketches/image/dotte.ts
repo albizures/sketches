@@ -19,14 +19,14 @@ const { sqrt, sin, cos } = Math;
 
 setSeed('dot');
 
-const sketchData: SketchData = {
+export const sketchData: SketchData = {
 	name: 'dotte',
 	debug: DebugLevel.NONE,
 };
 
 let img: CanvasRenderingContext2D;
 
-const preload = async () => {
+export const preload = async () => {
 	img = await loadImage(image);
 
 	resize();
@@ -171,7 +171,7 @@ const randomPixel = (x: number, y: number) => {
 
 let frameCount = 0;
 
-const draw = () => {
+export const draw = () => {
 	background(pallete[0]);
 
 	// drawImage(img, 0, 0);
@@ -208,10 +208,4 @@ const draw = () => {
 	}
 
 	frameCount += 1;
-};
-
-export default {
-	sketchData,
-	draw,
-	preload,
 };

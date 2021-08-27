@@ -39,11 +39,11 @@ const MainHexagon: Component<State> = {
 
 const system = new System();
 
-const sketchData: SketchData = {
+export const sketchData: SketchData = {
 	name: 'Hex',
 };
 
-const setup = () => {
+export const setup = () => {
 	let radius = 50;
 	let expantionSpeed = 0.1;
 	let inRadius = Math.sqrt(3) * (radius / 2) - 7;
@@ -89,7 +89,7 @@ const drawHexagon = (hex: Entity) => {
 	restore();
 };
 
-const draw = () => {
+export const draw = () => {
 	background('black');
 	center();
 
@@ -126,10 +126,4 @@ const draw = () => {
 
 		status.expantionSpeed = -status.expantionSpeed;
 	}
-};
-
-export default {
-	sketchData,
-	setup,
-	draw,
 };
