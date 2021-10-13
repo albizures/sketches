@@ -1,7 +1,6 @@
 import { context } from '../lib';
+import { fillStyle, strokeStyle } from './settings';
 import { Vector } from './coordinates';
-
-export const CLOSE = 'CLOSE';
 
 export let fills = true;
 export let { innerWidth: width, innerHeight: height } = window;
@@ -27,10 +26,6 @@ export const save = () => {
 
 export const restore = () => {
 	context.restore();
-};
-
-export const strokeStyle = (style: string) => {
-	context.strokeStyle = style;
 };
 
 export const lineWidth = (width: number) => {
@@ -66,13 +61,6 @@ export const lineTo = (x: number, y: number) => {
 
 export const closePath = () => {
 	context.closePath();
-};
-
-export const endShape = (close?: string) => {
-	if (close === CLOSE) {
-		context.closePath();
-	}
-	context.stroke();
 };
 
 export const vertex = (point: Vector) => {
@@ -126,10 +114,6 @@ export const bezierCurveTo = (
 		endX,
 		endY,
 	);
-};
-
-export const fillStyle = (style: string) => {
-	context.fillStyle = style;
 };
 
 export const rotate = (angle: number) => {

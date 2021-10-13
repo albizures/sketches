@@ -11,9 +11,31 @@ import {
 	quadraticCurveTo,
 	withDebug,
 } from '../lib';
+import { settings, FillMode, StrokeMode, RectMode } from './settings';
 import { context } from './context';
 import { Vector } from '../lib/coordinates';
-import { closePath, lineTo, arc, endShape } from './sketch';
+import { closePath, lineTo, arc } from './sketch';
+
+// TODO: move this variable to settings
+export const CLOSE = 'CLOSE';
+
+export const beginShape = () => {
+	context.beginPath();
+};
+
+export const endShape = (close?: string) => {
+	if (close === CLOSE) {
+		context.closePath();
+	}
+
+	if (settings.strokeMode === StrokeMode.STROKE) {
+		context.stroke();
+	}
+
+	if (settings.fillMode === FillMode.FILL) {
+		fill();
+	}
+};
 
 export const drawQuadraticBezier = (
 	start: Vector,
@@ -100,10 +122,9 @@ export const rectangle = (
 };
 
 export const circle = (x: number, y: number, radius: number) => {
-	beginPath();
+	beginShape();
 	arc(x, y, radius, 0, 2 * Math.PI);
 	endShape();
-	stroke();
 };
 
 circle.v = (vector: Vector, radius: number) => {
@@ -116,7 +137,16 @@ export const rect = (
 	width: number,
 	height: number,
 ) => {
-	context.rect(x, y, width, height);
+	context.beginPath();
+	if (RectMode.CORNER === settings.rectMode) {
+		context.rect(x, y, width, height);
+	} else if (RectMode.CENTER === settings.rectMode) {
+		const halfWidth = width / 2;
+		const halfHeight = height / 2;
+		context.rect(x - halfWidth, y - halfHeight, width, height);
+	}
+	context.fill();
+	context.closePath();
 };
 
 rect.v = (anchor: Vector, width: number, height: number) => {

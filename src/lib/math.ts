@@ -33,14 +33,28 @@ export const cos = (angle: number) => Math.cos(angle);
 export const tan = (angle: number) => Math.tan(angle);
 export const sin = (angle: number) => Math.sin(getAngle(angle));
 
+export const constrain = (n: number, low: number, high: number) => {
+	return Math.max(Math.min(n, high), low);
+};
+
 export const map = (
-	value: number,
-	min: number,
-	max: number,
-	start: number,
-	end: number,
+	n: number,
+	start1: number,
+	stop1: number,
+	start2: number,
+	stop2: number,
+	withinBounds = false,
 ) => {
-	return ((value - min) / (max - start)) * (end - start) + start;
+	const newval =
+		((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+	if (!withinBounds) {
+		return newval;
+	}
+	if (start2 < stop2) {
+		return constrain(newval, start2, stop2);
+	} else {
+		return constrain(newval, stop2, start2);
+	}
 };
 
 export const noise = (x: number, y?: number, z?: number): number => {

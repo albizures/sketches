@@ -1,9 +1,6 @@
 import { scale } from '.';
 import { restore, save } from './sketch';
-
-const constrain = (value: number, start: number, stop: number) => {
-	return Math.max(Math.min(value, start), stop);
-};
+import { constrain } from './math';
 
 const remap = (
 	value: number,

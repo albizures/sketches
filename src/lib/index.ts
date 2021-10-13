@@ -2,8 +2,9 @@ import { context } from './context';
 import { Vector } from './coordinates';
 import { noop } from './utils';
 import { DebugLevel } from './debug';
-
+import { resetMillisStart, millis } from './time';
 import { width, height, save, restore } from './sketch';
+import { updateFPS } from './loop';
 
 context.canvas.width = width;
 context.canvas.height = height;
@@ -125,9 +126,15 @@ export const strokeRect = (
 	return context.strokeRect(x, y, width, height);
 };
 
-type Draw = () => void;
-type Setup = () => void;
 type Preload = () => Promise<unknown>;
+
+export interface Setup {
+	(): void;
+}
+
+export interface Draw {
+	(): void;
+}
 
 interface Config {
 	draw?: Draw;
@@ -143,14 +150,17 @@ export const init = async (config: Config) => {
 	}
 
 	if (setup) {
+		resetMillisStart();
 		setup();
 	}
 
 	if (draw) {
 		const runDraw = () => {
+			updateFPS();
 			context.save();
 			draw();
 			context.restore();
+
 			window.requestAnimationFrame(runDraw);
 		};
 
@@ -160,6 +170,9 @@ export const init = async (config: Config) => {
 	return noop;
 };
 
+export { millis };
+export * from './timelapse';
+export * from './settings';
 export * from './context';
 export * from './sketch';
 export * from './math';
@@ -168,3 +181,4 @@ export * from './utils';
 export * from './coordinates';
 export * from './files';
 export * from './debug';
+export * from './loop';
