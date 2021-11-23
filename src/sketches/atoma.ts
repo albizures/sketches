@@ -47,7 +47,7 @@ export const draw = () => {
 	background('white');
 	textSize(30);
 	const modifier = map(mouse.x, 0, width, 0, 100);
-	text(modifier, new Vector(10, 30));
+	text.v(modifier, new Vector(10, 30));
 	translate.v(center);
 
 	circle.v(new Vector(0, 0), basePosition);

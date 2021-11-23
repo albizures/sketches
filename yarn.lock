@@ -954,6 +954,11 @@
   resolved "https://registry.yarnpkg.com/@types/bezier-js/-/bezier-js-0.0.8.tgz#e9dcdafa72ed4fe0decc72e35f8422fd402c269d"
   integrity sha512-X+sQeRVDMwlQYZEqQcVOVqCKrZa7nKVuYirlJCJQRBpucQSzPGxjv7VAncCGe0cr1v1hFuLAzK11XzjOPqQ0kA==
 
+"@types/eases@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/eases/-/eases-1.0.1.tgz#ce46e90de326ad77285050be60a2b36a43287a53"
+  integrity sha512-aTMjBiQeYkDj5eidAlp/wlXDvocSUxjIX44AYaS7YXAd7898n2HgN+gDzrSAXLnd6FKY6djOmTuC/M4bc5mrVw==
+
 "@types/q@^1.5.1":
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
