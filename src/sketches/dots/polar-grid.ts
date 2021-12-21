@@ -6,9 +6,6 @@ import {
 	fillStyle,
 	fill,
 	center,
-	text,
-	width,
-	height,
 	PI,
 } from '../../lib';
 import { mapRange } from 'canvas-sketch-util/math';

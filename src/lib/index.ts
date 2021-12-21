@@ -14,11 +14,13 @@ export interface SketchData {
 	debug?: DebugLevel;
 }
 
-export const autoSave = <T, D>(fn: (d: D) => T) => (d: D) => {
-	save();
-	fn(d);
-	restore();
-};
+export const autoSave =
+	<T, D>(fn: (d: D) => T) =>
+	(d: D) => {
+		save();
+		fn(d);
+		restore();
+	};
 
 export const drawImage = (
 	ctx: CanvasRenderingContext2D,
@@ -180,5 +182,6 @@ export * from './shapes';
 export * from './utils';
 export * from './coordinates';
 export * from './files';
+export * from './color';
 export * from './debug';
 export * from './loop';

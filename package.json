@@ -4,6 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
+		"types": "tsc --declaration --emitDeclarationOnly --outDir ./types",
 		"start": "parcel src/index.html"
 	},
 	"devDependencies": {
